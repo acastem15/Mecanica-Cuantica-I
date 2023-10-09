@@ -77,8 +77,30 @@ print(result,x)
 plt.plot(x,result)
 plt.show()
 
+def findEigenvalues(e_0,e_f,x): 
 
-    
+    dE= 0.001
+    e = e_0
+    eigenValues = []
+
+    while e <= e_f:
+        phi_E = phi2(x,e)[-1]
+        phi_dE=phi2(x,e+dE)[-1]
+
+        if phi_E*phi_dE <0:
+            eigenValues.append(e)
+
+        e+=dE
+
+    return eigenValues
+
+eigen = findEigenvalues(0,6,x)
+
+
+
+for e in eigen: 
+    plt.plot(x,phi2(x,e))
+plt.show()
 
 
     
