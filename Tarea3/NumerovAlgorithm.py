@@ -54,9 +54,9 @@ def phi2(x_array,E):
         elif i ==1: 
             result.append(1e-5)
         else: 
-            r_n = ((2*m)/(h_barra**2))*(potential(x-h,w)-E)
-            r_n_m= ((2*m)/(h_barra**2))*(potential(x-h,w)-E)
-            r_n_m_m= ((2*m)/(h_barra**2))*(potential(x-2+h,w)-E)
+            r_n = ((2*m)/(h_barra**2))*(potential(x_array[i],w)-E)
+            r_n_m= ((2*m)/(h_barra**2))*(potential(x_array[i-1],w)-E)
+            r_n_m_m= ((2*m)/(h_barra**2))*(potential(x_array[i-2],w)-E)
 
             num = (2*result[i-1]*(1+((5*(h**2)*r_n_m)/(12))))-(result[i-2]*(1-(((h**2)*r_n_m_m)/(12))))
             den = (1-(((h**2)*r_n)/(12)))
