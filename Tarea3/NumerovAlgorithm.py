@@ -13,6 +13,12 @@ def potential (x,w):
     return (1/2)*w*(x**2)
 
 
+def gaussianPotential(x):
+    pass
+
+def rationalPotential(x):
+    pass
+
 
 #Recursive function to find phi
 """
@@ -47,12 +53,15 @@ def phi2(x_array,E):
     result = []
 
     i = 0
+    norm = 0 
     for x in x_array: 
+
         
         if i ==0: 
             result.append(0)
         elif i ==1: 
             result.append(1e-5)
+            norm+=1e-5
         else: 
             r_n = ((2*m)/(h_barra**2))*(potential(x_array[i],w)-E)
             r_n_m= ((2*m)/(h_barra**2))*(potential(x_array[i-1],w)-E)
@@ -62,22 +71,34 @@ def phi2(x_array,E):
             den = (1-(((h**2)*r_n)/(12)))
 
             result.append(num/den)
-
+            norm+=abs(num/den)            
         i+=1
+
+    result = np.array(result)
+    result/=norm
+    result = list(result)
 
     return result
 
 
     
 x = x_discrete(-5,5)
-E = 5.5
+E = [0.5,1.5,2.5,3.5,4.5,5.5]
 
-result =phi2(x,E)
-print(result,x)
+en = 1.5
+result =phi2(x,en)
 plt.plot(x,result)
 plt.show()
 
-def findEigenvalues(e_0,e_f,x): 
+
+for en in E: 
+    result =phi2(x,en)
+    print(result,x)
+    plt.plot(x,result)
+plt.show()
+
+
+def findEigenvalues(e_0,e_f,dE,x): 
 
     dE= 0.001
     e = e_0
@@ -94,14 +115,14 @@ def findEigenvalues(e_0,e_f,x):
 
     return eigenValues
 
-eigen = findEigenvalues(0,6,x)
+#eigen = findEigenvalues(0,6,x)
 
-
+"""
 
 for e in eigen: 
     plt.plot(x,phi2(x,e))
 plt.show()
 
-
+"""
     
 
